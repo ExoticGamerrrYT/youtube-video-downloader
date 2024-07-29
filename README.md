@@ -29,10 +29,10 @@ choco install ffmpeg
 
 ```bash
 # Clone the repo
-git clone https://github.com/ExoticGamerrrYT/youtube-downloader.git
+git clone https://github.com/ExoticGamerrrYT/youtube-video-downloader.git
 
 # Move to the repo dir
-cd youtube-downloader
+cd youtube-video-downloader
 
 # Make virtual enviroment
 ## If virtualenv is installed

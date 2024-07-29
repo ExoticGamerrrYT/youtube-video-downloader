@@ -11,7 +11,7 @@ from PySide6.QtWidgets import (
     QComboBox,
 )
 from PySide6.QtCore import QThread, Signal, QSettings
-from downloader import download_youtube_video, get_video_qualities, install_ffmpeg
+from downloader import download_youtube_video, get_video_qualities
 
 
 class DownloadThread(QThread):
@@ -33,7 +33,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("YouTube Downloader")
+        self.setWindowTitle("Exotic YouTube Downloader")
         self.setGeometry(300, 300, 600, 400)
 
         layout = QVBoxLayout()

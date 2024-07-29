@@ -1,5 +1,9 @@
 # :arrow_forward: YouTube Video Downloader :arrow_forward:
 
+<p align="center">
+<img title="Logo" alt="ç" src="./images/Logo PNG.png">
+</p>
+
 As I am tired of youtube video downloaders that are malicious and full of ads or paid I have created one with [Python](https://www.python.org/), Qt for Python ([PySide 6.7](https://doc.qt.io/qtforpython-6/)) and [PyTube-fix](https://github.com/JuanBindez/pytubefix).
 
 ## How to use?
@@ -46,6 +50,10 @@ py -m venv .venv
 # Installing libraries
 pip install -r requirements.txt
 ```
+
+> virtualenv package web [here](https://virtualenv.pypa.io/en/latest/).
+
+Built using [auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe).
 
 ## License
 

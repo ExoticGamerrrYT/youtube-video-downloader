@@ -14,6 +14,7 @@ from PySide6.QtCore import QThread, Signal, QSettings
 from downloader import download_youtube_video, get_video_qualities
 import os
 
+
 class DownloadThread(QThread):
     log_signal = Signal(str)
     finished_signal = Signal()
@@ -32,6 +33,12 @@ class DownloadThread(QThread):
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
+
+        self.exotic_videos = os.path.join(
+            os.path.expanduser("~/Videos"), "Exotic Video Downloader"
+        )
+        if not os.path.exists(self.exotic_videos):
+            os.mkdir(self.exotic_videos)
 
         self.setWindowTitle("Exotic YouTube Downloader")
         self.setGeometry(300, 300, 600, 400)
@@ -72,8 +79,7 @@ class MainWindow(QWidget):
         self.loadSettings()
 
     def browse(self):
-        videos_dir = os.path.expanduser("~/Videos")
-        path = QFileDialog.getExistingDirectory(self, "Select Directory", videos_dir)
+        path = QFileDialog.getExistingDirectory(self, "Select Directory", self.exotic_videos)
         if path:
             self.path_input.setText(path)
 

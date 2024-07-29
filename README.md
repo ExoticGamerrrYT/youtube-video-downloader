@@ -27,18 +27,22 @@ choco install ffmpeg
 
 ```bash
 # Clone the repo
-git clone 
+git clone https://github.com/ExoticGamerrrYT/youtube-downloader.git
 
 # Move to the repo dir
-cd 
+cd youtube-downloader
 
 # Make virtual enviroment
-# If virtualenv is installed
+## If virtualenv is installed
 virtualenv .venv
-
-# If not
+## If not
 py -m venv .venv
 
+# Activating virtualenviroment (for Windows)
+.venv/Scripts/activate.ps1
+
+# Installing libraries
+pip install -r requirements.txt
 ```
 
 ## License

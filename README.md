@@ -22,8 +22,10 @@ choco install ffmpeg
 2. Extract and run `.exe`
 
 ## Contributing
-### Set up workspace
+
 > Remember to contribute according to the [license](LICENSE).
+
+### Setting up the workspace
 
 ```bash
 # Clone the repo

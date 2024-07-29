@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import QThread, Signal, QSettings
 from downloader import download_youtube_video, get_video_qualities
-
+import os
 
 class DownloadThread(QThread):
     log_signal = Signal(str)
@@ -72,7 +72,8 @@ class MainWindow(QWidget):
         self.loadSettings()
 
     def browse(self):
-        path = QFileDialog.getExistingDirectory(self, "Select Directory")
+        videos_dir = os.path.expanduser("~/Videos")
+        path = QFileDialog.getExistingDirectory(self, "Select Directory", videos_dir)
         if path:
             self.path_input.setText(path)
 

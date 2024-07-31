@@ -43,7 +43,7 @@ def get_video_qualities(url):
         qualities.update({stream.resolution for stream in progressive_streams})
 
         return sorted(qualities, key=lambda x: int(x.rstrip("p")), reverse=True)
-    except Exception as e:
+    except Exception:
         return []
 
 

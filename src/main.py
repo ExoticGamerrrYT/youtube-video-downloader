@@ -79,7 +79,9 @@ class MainWindow(QWidget):
         self.loadSettings()
 
     def browse(self):
-        path = QFileDialog.getExistingDirectory(self, "Select Directory", self.exotic_videos)
+        path = QFileDialog.getExistingDirectory(
+            self, "Select Directory", self.exotic_videos
+        )
         if path:
             self.path_input.setText(path)
 

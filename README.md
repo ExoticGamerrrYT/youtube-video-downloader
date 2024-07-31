@@ -55,6 +55,10 @@ pip install -r requirements.txt
 
 Built using [auto-py-to-exe](https://github.com/brentvollebregt/auto-py-to-exe).
 
+### Recommended
+
+- [Ruff](https://docs.astral.sh/ruff/) (already listed in [requirements.txt](requirements.txt)).
+
 ## License
 
 This project is under [GNU General Public License v3.0](LICENSE).

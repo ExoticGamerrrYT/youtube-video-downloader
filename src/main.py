@@ -1,18 +1,19 @@
+import os
+
+from downloader import download_youtube_video, get_video_qualities
+from PySide6.QtCore import QSettings, QThread, Signal
 from PySide6.QtWidgets import (
     QApplication,
-    QWidget,
-    QVBoxLayout,
+    QComboBox,
+    QFileDialog,
     QHBoxLayout,
+    QLabel,
     QLineEdit,
     QPushButton,
-    QFileDialog,
     QTextEdit,
-    QLabel,
-    QComboBox,
+    QVBoxLayout,
+    QWidget,
 )
-from PySide6.QtCore import QThread, Signal, QSettings
-from downloader import download_youtube_video, get_video_qualities
-import os
 
 
 class DownloadThread(QThread):

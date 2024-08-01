@@ -1,7 +1,8 @@
-from pytubefix import YouTube
-import subprocess
 import os
 import ssl
+import subprocess
+
+from pytubefix import YouTube
 
 # Disable SSL verification (use for debugging purposes only)
 ssl._create_default_https_context = ssl._create_unverified_context

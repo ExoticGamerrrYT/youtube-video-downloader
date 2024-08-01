@@ -1,7 +1,8 @@
 import os
 
 from downloader import download_youtube_video, get_video_qualities
-from PySide6.QtCore import QSettings, QThread, Signal
+from PySide6.QtCore import QSettings, QThread, QUrl, Signal
+from PySide6.QtMultimedia import QSoundEffect
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
@@ -119,6 +120,8 @@ class MainWindow(QWidget):
         self.download_button.setEnabled(True)
         self.quality_dropdown.setEnabled(True)
 
+        self.play_sound()
+
     def update_qualities(self):
         url = self.url_input.text()
         if url:
@@ -128,6 +131,15 @@ class MainWindow(QWidget):
             self.quality_dropdown.setEnabled(True)
         else:
             self.quality_dropdown.setEnabled(False)
+
+    def play_sound(self):
+        sound = QSoundEffect(self)
+        sound_file_path = os.path.join(
+            os.path.dirname(__file__), "../sound/chime_1.wav"
+        )
+        sound.setSource(QUrl.fromLocalFile(os.path.abspath(sound_file_path)))
+        sound.setVolume(1.5)
+        sound.play()
 
     def loadSettings(self):
         """

@@ -100,6 +100,7 @@ def download_youtube_video(url, path, quality, log_callback):
             log_callback(
                 f'Video "{yt.title}" has been successfully downloaded in {quality} quality.'
             )
+            # Aqui quiero
         else:
             log_callback(f"Downloading video in {quality}...")
             video_file = video_stream.download(output_path=path)

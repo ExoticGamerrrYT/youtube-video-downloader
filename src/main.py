@@ -100,6 +100,9 @@ class MainWindow(QWidget):
         self.download_thread = DownloadThread(url, path, quality)
         self.download_thread.log_signal.connect(self.update_log)
         self.download_thread.finished_signal.connect(self.download_finished)
+        self.download_thread.finished_signal.connect(
+            self.download_failed
+        )  # Add this line
         self.download_thread.start()
 
         # Disable widgets during download
@@ -120,7 +123,10 @@ class MainWindow(QWidget):
         self.download_button.setEnabled(True)
         self.quality_dropdown.setEnabled(True)
 
-        self.play_sound()
+        self.play_sound("chime_1.wav")
+
+    def download_failed(self):
+        self.play_sound("error_chime.mp3")
 
     def update_qualities(self):
         url = self.url_input.text()
@@ -132,10 +138,10 @@ class MainWindow(QWidget):
         else:
             self.quality_dropdown.setEnabled(False)
 
-    def play_sound(self):
+    def play_sound(self, sound_name):
         sound = QSoundEffect(self)
         sound_file_path = os.path.join(
-            os.path.dirname(__file__), "../sound/chime_1.wav"
+            os.path.dirname(__file__), f"../sound/{sound_name}"
         )
         sound.setSource(QUrl.fromLocalFile(os.path.abspath(sound_file_path)))
         sound.setVolume(1.5)

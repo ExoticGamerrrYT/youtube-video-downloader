@@ -53,7 +53,7 @@ def download_youtube_video(url, path, quality, log_callback):
         # Check if ffmpeg is installed, if not, install it
         if not check_ffmpeg():
             install_ffmpeg(log_callback)
-            return
+            raise Exception("FFmpeg installation required.")
 
         # Create a YouTube object
         yt = YouTube(url)

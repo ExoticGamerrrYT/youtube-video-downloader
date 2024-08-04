@@ -64,11 +64,8 @@ class MainWindow(QWidget):
         self.browse_button.clicked.connect(self.browse)
         self.path_layout.addWidget(self.browse_button)
 
-        self.add_button = QPushButton("Add to Queue", self)
-        self.add_button.clicked.connect(self.add_to_queue)
-
         self.download_button = QPushButton("Download", self)
-        self.download_button.clicked.connect(self.download)
+        self.download_button.clicked.connect(self.add_to_queue)
 
         self.log_label = QLabel("Log", self)
         self.log_output = QTextEdit(self)
@@ -79,7 +76,6 @@ class MainWindow(QWidget):
         layout.addWidget(self.url_input)
         layout.addWidget(self.quality_dropdown)
         layout.addLayout(self.path_layout)
-        layout.addWidget(self.add_button)
         layout.addWidget(self.download_button)
         layout.addWidget(QLabel("Queue", self))
         layout.addWidget(self.queue_list)
@@ -111,47 +107,38 @@ class MainWindow(QWidget):
         item = QListWidgetItem(f"{url} - {quality} - {path}")
         self.queue_list.addItem(item)
         self.download_queue.append((url, path, quality))
+        self.url_input.clear()
+        self.quality_dropdown.clear()
+        self.quality_dropdown.setEnabled(False)
+        if not self.download_thread or not self.download_thread.isRunning():
+            self.process_queue()
 
     def download(self):
         if not self.download_queue:
             self.log_output.append("The download queue is empty.")
             return
 
-        if not self.download_thread or not self.download_thread.isRunning():
+        if self.download_queue and (
+            not self.download_thread or not self.download_thread.isRunning()
+        ):
             url, path, quality = self.download_queue.pop(0)
             self.download_thread = DownloadThread(url, path, quality)
             self.download_thread.log_signal.connect(self.update_log)
             self.download_thread.finished_signal.connect(self.download_finished)
             self.download_thread.finished_signal.connect(self.process_queue)
             self.download_thread.start()
-            self.queue_list.takeItem(0)  # Remove the first item from the queue
-
-            # Disable widgets during download
-            self.url_input.setEnabled(False)
-            self.path_input.setEnabled(False)
-            self.browse_button.setEnabled(False)
-            self.add_button.setEnabled(False)
-            self.download_button.setEnabled(False)
-            self.quality_dropdown.setEnabled(False)
+            self.queue_list.takeItem(0)
 
     def process_queue(self):
-        if self.download_queue:
+        if self.download_queue and (
+            not self.download_thread or not self.download_thread.isRunning()
+        ):
             self.download()
-        else:
-            self.download_finished()
 
     def update_log(self, message):
         self.log_output.append(message)
 
     def download_finished(self):
-        # Re-enable widgets after download
-        self.url_input.setEnabled(True)
-        self.path_input.setEnabled(True)
-        self.browse_button.setEnabled(True)
-        self.add_button.setEnabled(True)
-        self.download_button.setEnabled(True)
-        self.quality_dropdown.setEnabled(True)
-
         self.play_sound("chime_1.wav")
 
     def download_failed(self):
